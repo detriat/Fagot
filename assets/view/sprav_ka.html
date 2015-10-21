@@ -1,0 +1,85 @@
+<!-- Начало шапки -->
+<div class="container-fluid row">
+    <div class="row"></div>
+    <div class="col-lg-12 header">
+        <div class="col-lg-2 logo-header">FAGOT</div>
+        <ul>
+            <li class="dropdown">
+                <a data-toggle="dropdown" data-target="#">Справочники<b class="caret"></b></a>
+                <ul class="dropdown-menu dop-menu" role="menu" aria-labelledby="dLabel">
+                    <li><a ng-href="#/ingri">Ингредиенты</a></li>
+                    <li><a ng-href="#/kalky">Калькуляция</a></li>
+                </ul>
+            </li>
+            <li><a ng-href="#/sklad">Склад</a></li>
+            <li><a ng-href="#/kasa">Касса</a></li>
+            <li><a ng-href="#/itog">Итоги</a></li>
+        </ul>
+    </div>
+</div>
+<!-- Конец шапки -->
+<!-- Начало контента -->
+<div class="container">
+    <div class="row">
+        <button class="md-raised md-primary md-button md-default-theme md-ink-ripple btn btn-primary btn-lg" ng-transclude="" data-toggle="modal" data-target="#myModal">
+            <span class="ng-scope">Добавить</span>
+            <div class="md-ripple-container"></div>
+        </button>
+        <!-- Начало модального окна -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Добавление ингридиента</h4>
+                    </div>
+                    <div class="modal-body">
+                        <md-input-container class="flex">
+                            <label for="input_19">Название товара</label>
+                            <input ng-model="user.firstName" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
+                        </md-input-container>
+
+                        <md-input-container class="flex">
+                            <label for="input_19">Цена</label>
+                            <input ng-model="user.firstName" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
+                        </md-input-container>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Добавить</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Конец модального окна -->
+        <div class="col-lg-12 ingridientu ">
+            <md-whiteframe class="col-lg-4 in-raz md-whiteframe-z1">
+                <div>
+                    Виски
+                    <a href="#">
+                        <ng-md-icon icon="delete" style="fill: #8C898B " size="18"></ng-md-icon>
+                    </a>
+                    <a href="#">
+                        <ng-md-icon icon="edit" style="fill: #8C898B " size="18"></ng-md-icon>
+                    </a>
+                </div>
+                <div>Водка</div>
+                <div>Ром</div>
+                <div>Виски</div>
+                <div>Виски</div>
+                <div>Виски</div>
+                <div>Виски</div>
+            </md-whiteframe>
+            <md-whiteframe class="col-lg-7 col-lg-offset-1  in-in md-whiteframe-z1">
+                <div>Виски</div>
+                <div>Виски</div>
+                <div>Виски</div>
+                <div>Виски</div>
+                <div>Виски</div>
+                <div>Виски</div>
+                <div>Виски</div>
+            </md-whiteframe>
+        </div>
+    </div>
+</div>
+<!-- Конец контента -->
