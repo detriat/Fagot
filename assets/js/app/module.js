@@ -1,17 +1,14 @@
 (function(){
     'use strict';
 
-    var myapp = angular.module('app',[
+    angular.module('app',[
         'ngRoute',
         'ngResource',
         'ngMaterial',
         'ngMdIcons'
-    ]);
+    ]).config(appConfig);
 
-    myapp.config(appConfig);
-    myapp.config(['$controllerProvider', function($controllerProvider) { $controllerProvider.allowGlobals(); }]);
     appConfig.$inject = ["$routeProvider"];
-
     function appConfig($routeProvider){
 
         $routeProvider
@@ -22,20 +19,20 @@
             })
             .when('/ingri',{
 
-            templateUrl: "view/sprav_in.html"
-            //controller: 'SpravinController'
+            templateUrl: "view/sprav_in.html",
+            controller: 'SpravinController'
 
             })
             .when('/kalky',{
 
                 templateUrl: "view/sprav_ka.html",
-                //controller: 'SpravkaController'
+                controller: 'SpravkaController'
 
             })
             .when('/sklad',{
 
                 templateUrl: "view/sklad.html",
-                //controller: 'SkladController'
+                controller: 'SkladController'
 
             })
             .when('/kasa',{
@@ -52,6 +49,7 @@
             redirectTo: '/'
         })
     }
+
 
 })();
 

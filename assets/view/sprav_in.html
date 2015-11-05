@@ -22,7 +22,7 @@
 <div class="container">
     <div class="row">
                 <div class="col-lg-5">
-                    <button class="md-raised md-primary md-button md-default-theme md-ink-ripple btn btn-primary btn-lg" ng-transclude="" data-toggle="modal" data-target="#myModal">
+                    <button class="md-raised md-primary md-button md-default-theme md-ink-ripple btn btn-primary btn-lg"  data-toggle="modal" data-target="#myModal">
                         <span class="ng-scope">Добавить</span>
                         <div class="md-ripple-container"></div>
                     </button>
@@ -36,17 +36,23 @@
                         <h4 class="modal-title" id="myModalLabel">Добавление ингридиента</h4>
                     </div>
                     <div class="modal-body">
+
                         <md-input-container class="flex">
                             <label for="input_19">Название категории</label>
-                            <input ng-model="ingri.category" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
+                            <input ng-model="newIngridient.category" ng-model="selected" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
                         </md-input-container>
+
                         <md-input-container class="flex">
                             <label for="input_19">Название товара</label>
-                            <input ng-model="ingri.title" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
+                            <input ng-model="newIngridient.title" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
                         </md-input-container>
                         <md-input-container class="flex">
                             <label for="input_19">Размер</label>
-                            <input ng-model="ingri.size" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
+                            <input ng-model="newIngridient.size" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
+                        </md-input-container>
+                        <md-input-container class="flex">
+                            <label for="input_19">Единици измерения</label>
+                            <input ng-model="newIngridient.ed" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
                         </md-input-container>
                     </div>
                     <div class="modal-footer">
@@ -56,34 +62,69 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Редактирование ингридиента</h4>
+                    </div>
+                    <div class="modal-body">
+                        <md-input-container class="flex hidden">
+                            <label for="input_19">Код</label>
+                            <input ng-model="updIngridient.id" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
+                        </md-input-container>
+                        <md-input-container class="flex">
+                            <label for="input_19">Название категории</label>
+                            <input ng-model="updIngridient.category" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
+                        </md-input-container>
+                        <md-input-container class="flex">
+                            <label for="input_19">Название товара</label>
+                            <input ng-model="updIngridient.title" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
+                        </md-input-container>
+                        <md-input-container class="flex">
+                            <label for="input_19">Размер</label>
+                            <input ng-model="updIngridient.size" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
+                        </md-input-container>
+                        <md-input-container class="flex">
+                            <label for="input_19">Единицы измерения</label>
+                            <input ng-model="updIngridient.size" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
+                        </md-input-container>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-ng-click="save_update()">Сохранить</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Конец модального окна -->
         <div class="col-lg-12 ingridientu ">
             <md-whiteframe class="col-lg-4 in-raz md-whiteframe-z1">
-                <div>
-                    Виски
-                    <a href="#">
-                        <ng-md-icon icon="delete" style="fill: #8C898B " size="18"></ng-md-icon>
-                    </a>
-                    <a href="#">
-                        <ng-md-icon icon="edit" style="fill: #8C898B " size="18"></ng-md-icon>
-                    </a>
+                <div data-ng-repeat="ingri in ingridients | unique: 'category'">
+                    <div>
+                        {{ingri.category}}
+                    </div>
+
                 </div>
-                <div>Водка</div>
-                <div>Ром</div>
-                <div>Виски</div>
-                <div>Виски</div>
-                <div>Виски</div>
-                <div>Виски</div>
             </md-whiteframe>
+
             <md-whiteframe class="col-lg-7 col-lg-offset-1  in-in md-whiteframe-z1">
-                <div>Виски</div>
-                <div>Виски</div>
-                <div>Виски</div>
-                <div>Виски</div>
-                <div>Виски</div>
-                <div>Виски</div>
-                <div>Виски</div>
+                <div data-ng-repeat="ingri in ingridients">
+                    <div>
+                        {{ingri.title}}
+                        <a data-target="#">
+                            <ng-md-icon icon="delete" style="fill: #8C898B " size="18" data-ng-click="delete_inri(ingri, $index)"></ng-md-icon>
+                        </a>
+                        <a data-target="#">
+                            <ng-md-icon icon="edit" style="fill: #8C898B "  size="18"  data-ng-click="update_inri(ingri, $index)"></ng-md-icon>
+                        </a>
+                    </div>
+
+                </div>
             </md-whiteframe>
+
+
         </div>
     </div>
 </div>
