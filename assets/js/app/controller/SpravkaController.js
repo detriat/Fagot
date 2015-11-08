@@ -76,7 +76,10 @@
         $scope.delete_input = function (){
             $(this).parent().remove();
         }
+
+    
     }
+
 
 
 
