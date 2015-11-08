@@ -23,7 +23,10 @@
     <div class="row">
         <div class="col-lg-5">
             <button class="md-raised md-primary md-button md-default-theme md-ink-ripple btn btn-primary btn-lg"  data-toggle="modal" data-target="#myModal">
-                <span class="ng-scope">Добавить</span>
+                <span class="ng-scope">
+                    <ng-md-icon class="add_icon" icon="add_circle_outline" style="fill: #ffffff "  size="25"></ng-md-icon>
+                    Добавить
+                </span>
                 <div class="md-ripple-container"></div>
             </button>
         </div>
@@ -33,30 +36,43 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Добавление ингридиента</h4>
+                        <h4 class="modal-title" id="myModalLabel">Добавление коктейля</h4>
                     </div>
                     <div class="modal-body">
 
                         <md-input-container class="flex">
-                            <label for="input_19">Название товара</label>
-                            <input  auto-complete ui-items="categoriess" ng-model="selected" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
+                            <label for="input_19">Название коктейля</label>
+                            <input  auto-complete ui-items="categoriess" ng-model="item.title" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
+                        </md-input-container>
+                            <addingri>
+                        <button type="button" class="btn btn-primary" >
+                            <ng-md-icon class="add_icon" icon="add_circle_outline" style="fill: #ffffff "  size="25"></ng-md-icon>
+                        </button>
+                            </addingri>
+                        <h4>Добавление ингридиента и его размер</h4>
+<div id="auto_generat" data-ng-repeat="ingri in item.ingridients">
+
+                        <md-input-container class="flex name_ingi_k">
+                            <label for="input_19">Название ингридиента</label>
+                            <input ng-model="{ingri.title}" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
+                        </md-input-container>
+                        <md-input-container class="flex size_ingri_k">
+                            <label for="input_19">Размер</label>
+                            <input ng-model="{ingri.size}" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
                         </md-input-container>
 
-                        <md-input-container class="flex">
-                            <label for="input_19">Название товара</label>
-                            <input ng-model="ingri.title" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
-                        </md-input-container>
-                        <md-input-container class="flex">
-                            <label for="input_19">Размер</label>
-                            <input ng-model="ingri.size" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
-                        </md-input-container>
-                        <md-input-container class="flex">
-                            <label for="input_19">Единици измерения</label>
-                            <input ng-model="update.size" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
+                        <button type="button" class="btn btn-primary delete_ingri_k" data-ng-click="delete_input()">
+                            <ng-md-icon class="add_icon" icon="cancel" style="fill: #ffffff "  size="25"></ng-md-icon>
+                        </button>
+
+</div>
+                        <md-input-container class="flex price_ingr_k">
+                            <label for="input_19">Цена</label>
+                            <input ng-model="item.price" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
                         </md-input-container>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-ng-click="save_inri()">Добавить</button>
+                        <button type="button" class="btn btn-primary" data-ng-click="save_item()">Добавить</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                     </div>
                 </div>
@@ -100,24 +116,16 @@
         </div>
         <!-- Конец модального окна -->
         <div class="col-lg-12 ingridientu ">
-            <md-whiteframe class="col-lg-4 in-raz md-whiteframe-z1">
-                <div data-ng-repeat="ingri in ingridients | unique: 'ingri.category'">
-                    <div>
-                        {{ingri.category}}
-                    </div>
-
-                </div>
-            </md-whiteframe>
 
             <md-whiteframe class="col-lg-7 col-lg-offset-1  in-in md-whiteframe-z1">
-                <div data-ng-repeat="ingri in ingridients">
+                <div data-ng-repeat="item in items">
                     <div>
-                        {{ingri.title}}
+                        {{item.title}}
                         <a data-target="#">
-                            <ng-md-icon icon="delete" style="fill: #8C898B " size="18" data-ng-click="delete_inri(ingri, $index)"></ng-md-icon>
+                            <ng-md-icon icon="delete" style="fill: #8C898B " size="18" data-ng-click="delete_inri(item, $index)"></ng-md-icon>
                         </a>
                         <a data-target="#">
-                            <ng-md-icon icon="edit" style="fill: #8C898B "  size="18"  data-ng-click="update_inri(ingri, $index)"></ng-md-icon>
+                            <ng-md-icon icon="edit" style="fill: #8C898B "  size="18"  data-ng-click="update_inri(item, $index)"></ng-md-icon>
                         </a>
                     </div>
 

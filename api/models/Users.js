@@ -26,6 +26,9 @@ var Users = {
             required: "true",
             unique:true
         },
+        telefon:{
+            type:"string"
+        },
         name: {
             type: "string"
         },

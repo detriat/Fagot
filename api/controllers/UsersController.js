@@ -13,6 +13,7 @@ module.exports = {
             login : req.param('login'),
             password : req.param('password'),
             email: req.param('email'),
+            telefon: req.param('telefon'),
             name: req.param('name'),
             surname: req.param('surname')
         };

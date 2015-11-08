@@ -19,7 +19,7 @@ var Items = {
             type: 'string'
         },
         components: {
-            type: 'string'
+            type: 'object'
         },
         size: {
             type: 'integer'
@@ -28,7 +28,7 @@ var Items = {
             type: 'integer'
         }
     }
-}
+};
 
 module.exports = Items;
 

@@ -1,31 +1,22 @@
 (function () {
     'use strict';
 
-    angular.module('app').controller('SpravinController', SpravinController).directive('autoComplete', function($timeout) {
-        return function(scope, iElement, iAttrs) {
-            iElement.autocomplete({
-                source: scope[iAttrs.uiItems],
-                select: function() {
-                    $timeout(function() {
-                        iElement.trigger('input');
-                    }, 0);
-                }
-            });
-        };
-    });
+    angular.module('app').controller('SpravinController', SpravinController);
 
 
     SpravinController.$inject = ["$scope", "Ingridients"];
 
     function SpravinController($scope, Ingridients, $mdDialog) {
 
+
+
         $scope.ingridients = Ingridients.query();
 
         $scope.ingri = "";
 
 
-        $scope.save_inri = function () {
 
+        $scope.save_inri = function () {
             var Ingridient = {
                 "category": $scope.newIngridient.category,
                 "title": $scope.newIngridient.title,
@@ -55,33 +46,22 @@
                 id : ingri.id,
                 category:ingri.category,
                 title: ingri.title,
-                size: ingri.size,
-                index: $index
+                size: ingri.size
             };
-
-
 
         };
 
         $scope.save_update = function (){
-
-            var ingri = new Ingridients(Ingridient);
-
-            var ingri= $scope.updIngridient;
-            var Ingr = Ingridients.get({id: ingri.id}, function(){
+            var Ingr = Ingridients.get({id: $scope.updIngridient.id}, function(){
                 Ingr.category = $scope.updIngridient.category;
                 Ingr.title = $scope.updIngridient.title;
                 Ingr.size = $scope.updIngridient.size;
-                Ingr.$save().then(function(ingr){
-                   // $scope.ingridients.splice($scope.updIngridient.index,1);
-                    $scope.ingridients.push(Ingr);
-
+                Ingr.$save().then(function(res){
+                    $("#myModal1").modal('hide');
+                    $scope.ingridients = Ingridients.query();
                 });
-
             });
-
         };
-
 
 
     }
