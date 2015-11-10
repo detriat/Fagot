@@ -11,8 +11,9 @@ module.exports = {
             number : req.param('number'),
             kolvo : req.param('kolvo'),
             name : req.param('name'),
-            surname : req.param('surname')
-			
+            surname : req.param('surname'),
+			         date : req.param('date')
+
         };
 
         TableZ.create(elem).exec(function (err, user) {
@@ -20,4 +21,3 @@ module.exports = {
         });
 }
 };
-

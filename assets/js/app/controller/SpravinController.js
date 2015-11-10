@@ -1,20 +1,20 @@
 (function () {
     'use strict';
 
-    angular.module('app').controller('SpravinController', SpravinController);
-
-
+    var app = angular.module('app').controller('SpravinController', SpravinController);
     SpravinController.$inject = ["$scope", "Ingridients"];
 
     function SpravinController($scope, Ingridients, $mdDialog) {
-
-
-
         $scope.ingridients = Ingridients.query();
-
         $scope.ingri = "";
-
-
+        $scope.add = function () {
+           $("#myModal").modal('show');
+           $scope.newIngridient = {
+             "category" : '',
+             "title" : '',
+             "size" : ''
+           }
+        };
 
         $scope.save_inri = function () {
             var Ingridient = {

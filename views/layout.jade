@@ -10,6 +10,7 @@ html
         link(rel="stylesheet", href="vendor/bootstrap/dist/css/bootstrap.min.css")
         link(rel="stylesheet", href="vendor/angular-material/angular-material.min.css")
         link(rel="stylesheet", href="vendor/angular-material-icons/angular-material-icons.css")
+        link(rel="stylesheet", href="vendor/allmighty-autocomplete/autocomplete.css")
         //STYLES END
     body(data-ng-app="app")
         block body
@@ -22,6 +23,7 @@ html
         script(src="/vendor/angular-animate/angular-animate.min.js")
         script(src="/vendor/angular-aria/angular-aria.min.js")
         script(src="/vendor/angular-material-icons/angular-material-icons.min.js")
+        script(src="/vendor/jquery-ui/jquery-ui.min.js")
         // The linker searches for this tag and adds js.  If there's no linker, we point to sails.io.js
         // SCRIPTS
         script(src="/js/dependencies/sails.io.js")
@@ -32,6 +34,7 @@ html
         script(src="/js/app/controller/SkladController.js")
         script(src="/js/app/controller/SpravinController.js")
         script(src="/js/app/controller/SpravkaController.js")
+        script(src="/js/app/controller/autocomplete.js")
         script(src="/js/app/filter/unique.js")
         script(src="/js/app/services/Ingridients.js")
         script(src="/js/app/services/Items.js")

@@ -27,10 +27,26 @@
     SpravkaController.$inject = ["$scope", "Items"];
     function SpravkaController ($scope, Items) {
 
+
         $scope.items = Items.query();
         $scope.counter = 0;
         $scope.item = "";
 
+        $scope.delete_item = function (item, $index) {
+
+        if (!confirm("Дейтсвительно хотите удалить?")) return;
+                item.$remove().then(function(){
+                    $scope.items.splice($index,1);
+                });
+        };
+        $scope.add = function () {
+           $("#myModal").modal('show');
+           $scope.item = {
+             "id" : '',
+             "title" : '',
+             "price" : ''             
+           }
+        };
         $scope.save_item = function () {
 
             var total_count = 0 ;
@@ -48,36 +64,29 @@
 
             var item = new Items(Item);
             item.$save().then(function (newItem) {
-                //$scope.ingridients.push(newItem);
-                console.log("hui");
-                //$("#myModal").modal('hide');
-                //$scope.newIngridient="";
+                $scope.items.push(newItem);
+                $("#myModal").modal('hide');
+                $scope.newItem="";
             });
 
 
         };
 
-        $scope.add_input = function (){
-
-            $("#auto_generat").append('<md-input-container class="flex name_ingi_k">' +
-                '<label for="input_19">Название ингридиента</label>' +
-                '<input ng-model="ingri.item'+$scope.counter +'.title" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">' +
-                '</md-input-container>' +
-                '<md-input-container class="flex size_ingri_k">' +
-                '<label for="input_19">Размер</label>' +
-                '<input ng-model="ingri.size" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">' +
-                '<button type="button" class="btn btn-primary delete_ingri_k" data-ng-click="delete_input()>' +
-                '<ng-md-icon class="add_icon" icon="cancel" style="fill: #ffffff "  size="25"></ng-md-icon>' +
-                '</button>'+
-                '</md-input-container>');
-            $scope.counter++;
-        };
 
         $scope.delete_input = function (){
             $(this).parent().remove();
         }
 
-    
+        $scope.update_item = function(item, $index) {
+            $("#myModal").modal();
+            $scope.item = {
+                "id" : item.id,
+                "title": item.title,
+                //"components":ingri,
+                "price": item.price
+                };
+        };
+
     }
 
 

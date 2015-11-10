@@ -6,15 +6,19 @@
 */
 var Sklad = {
     attributes: {
+        category:{
+            type: 'string'
+        },
         title: {
             type: 'string'
         },
         amount: {
             type: 'integer'
+        },
+        price: {
+          type: 'integer'
         }
     }
 }
 
 module.exports = Sklad;
-
-

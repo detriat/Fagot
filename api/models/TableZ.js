@@ -20,9 +20,9 @@ var TableZ = {
       surname:{
           type:'string'
       },
-	  status:{
-		type:'string'
-	  }
-  }
+  	  date: {
+  		    type: 'date'
+  	  }
+}
 };
 module.exports = TableZ;

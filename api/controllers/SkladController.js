@@ -8,8 +8,10 @@
 module.exports = {
     create: function (req, res){
         var elem = {
+            category : req.param('category'),
             title : req.param('title'),
-            amount : req.param('amount')
+            amount : req.param('amount'),
+            price : req.param('price')
         };
 
         Sklad.create(elem).exec(function (err, user) {
@@ -17,4 +19,3 @@ module.exports = {
         });
     }
 };
-

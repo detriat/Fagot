@@ -7,7 +7,7 @@
         'ngMaterial',
         'ngMdIcons'
     ]).config(appConfig);
-
+    
     appConfig.$inject = ["$routeProvider"];
     function appConfig($routeProvider){
 
@@ -52,4 +52,3 @@
 
 
 })();
-

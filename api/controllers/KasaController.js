@@ -9,6 +9,7 @@
 module.exports = {
     create: function (req, res){
         var elem = {
+            category : req.param('category'),
             title : req.param('title'),
             amount : req.param('amount'),
             price : req.param('price')
@@ -19,4 +20,3 @@ module.exports = {
         });
     }
 };
-

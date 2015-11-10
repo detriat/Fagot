@@ -6,6 +6,9 @@
 */
 var Kasa = {
     attributes: {
+        category: {
+          type: 'string'
+        },
         title: {
             type: 'string'
         },
@@ -19,4 +22,3 @@ var Kasa = {
 }
 
 module.exports = Kasa;
-
