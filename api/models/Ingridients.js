@@ -19,7 +19,7 @@ var Ingridients = {
             type: 'string'
         },
         category: {
-            type: 'string'
+            model: 'categories'
         },
         size: {
             type: 'integer'
@@ -28,8 +28,3 @@ var Ingridients = {
 }
 
 module.exports = Ingridients;
-
-
-
-
-

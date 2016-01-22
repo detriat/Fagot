@@ -2,35 +2,39 @@
     'use strict';
 
     var app = angular.module('app').controller('SpravinController', SpravinController);
-    SpravinController.$inject = ["$scope", "Ingridients"];
+    SpravinController.$inject = ["$scope", "Ingridients", "$mdDialog", 'Categories'];
 
-    function SpravinController($scope, Ingridients, $mdDialog) {
+    function SpravinController($scope, Ingridients, $mdDialog, Categories) {
         $scope.ingridients = Ingridients.query();
+        $scope.categories = Categories.query();
         $scope.ingri = "";
-        $scope.add = function () {
-           $("#myModal").modal('show');
-           $scope.newIngridient = {
-             "category" : '',
-             "title" : '',
-             "size" : ''
-           }
+        $scope.add = function (ev) {
+           $mdDialog.show({
+             controller: 'SpravinControllerDialog',
+             templateUrl: 'view/sprav_in_dialog.html',
+             parent: angular.element(document.body),
+             targetEvent: ev,
+             clickOutsideToClose: false
+           }).then(function(){
+
+           }, function(err){
+             console.log(err);
+           });
+        };
+        $scope.add_category = function (ev) {
+           $mdDialog.show({
+             controller: 'CategoryControllerDialog',
+             templateUrl: 'view/categoryDialog.html',
+             parent: angular.element(document.body),
+             targetEvent: ev,
+             clickOutsideToClose: false
+           }).then(function(){
+
+           }, function(err){
+             console.log(err);
+           });
         };
 
-        $scope.save_inri = function () {
-            var Ingridient = {
-                "category": $scope.newIngridient.category,
-                "title": $scope.newIngridient.title,
-                "size": $scope.newIngridient.size
-            };
-
-            var ingri = new Ingridients(Ingridient);
-            ingri.$save().then(function (newIngri) {
-                $scope.ingridients.push(newIngri);
-                $("#myModal").modal('hide');
-                $scope.newIngridient="";
-            });
-
-        };
 
         $scope.delete_inri = function (ingri, $index) {
 
