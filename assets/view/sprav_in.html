@@ -75,7 +75,7 @@
             <md-whiteframe class="col-lg-3 in-raz md-whiteframe-z1">
                 <div data-ng-repeat="category in categories">
                     <div>
-                        {{category.name}}
+                        {{category.name}} <ng-md-icon ng-click="delete_category(category.id)" icon="delete" size="20" class="pull-right" style="fill:black"> </ng-md-icon> 
                     </div>
 
                 </div>

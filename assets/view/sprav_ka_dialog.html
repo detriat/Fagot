@@ -1,0 +1,52 @@
+<md-dialog aria-label="New order" class="neworder" ng-cloak>
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Ingridients</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()" aria-label="close">
+          <ng-md-icon icon="close" size="24" style="fill: white"></ng-md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <md-content class="md-padding min">
+
+                                <md-input-container class="flex">
+                                    <label for="input_19">Название коктейля</label>
+                                    <input  auto-complete ui-items="categoriess" ng-model="item.title" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
+                                </md-input-container>
+                                <button type="button" class="btn btn-primary" ng-click="add_prop()">
+                                    <ng-md-icon class="add_icon" icon="add_circle_outline" style="fill: #ffffff "  size="25"></ng-md-icon>
+                                    <h4>Добавление ингридиента и его размер</h4>
+                                </button>
+                            <div id="auto_generat" >
+                             <div data-ng-repeat="item in add">
+                                <md-input-container class="flex name_ingi_k" >
+                                    <label for="input_19">Название ингридиента</label>
+                                    <input ng-model="item.ingridient" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
+                                </md-input-container>
+                                <md-input-container class="flex size_ingri_k">
+                                    <label for="input_19">Размер</label>
+                                    <input ng-model="item.kolvo" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
+                                </md-input-container>
+
+                                <button type="button" class="btn btn-primary delete_ingri_k" data-ng-click="delete_input()">
+                                    <ng-md-icon class="add_icon" icon="cancel" style="fill: #ffffff "  size="25"></ng-md-icon>
+                                </button>
+                              </div>
+
+        </div>
+                                <md-input-container class="flex price_ingr_k">
+                                    <label for="input_19">Цена</label>
+                                    <input ng-model="item.price" class="ng-pristine ng-valid md-input ng-touched" id="input_19" aria-invalid="false" style="">
+                                </md-input-container>
+
+    </md-content>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button class="md-raised md-primary" data-ng-click="save()"><ng-md-icon icon="save" style="fill: white" size="20"></ng-md-icon>Save</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
