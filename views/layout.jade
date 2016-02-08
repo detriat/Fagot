@@ -10,7 +10,8 @@ html
         link(rel="stylesheet", href="vendor/bootstrap/dist/css/bootstrap.min.css")
         link(rel="stylesheet", href="vendor/angular-material/angular-material.min.css")
         link(rel="stylesheet", href="vendor/angular-material-icons/angular-material-icons.css")
-        link(rel="stylesheet", href="vendor/allmighty-autocomplete/autocomplete.css")
+        link(rel="stylesheet", href="vendor/angular-loading-bar/src/loading-bar.css")
+        link(rel="stylesheet", href="vendor/angular-material-data-table/dist/md-data-table.min.css")
         //STYLES END
     body(data-ng-app="app")
         block body
@@ -24,6 +25,10 @@ html
         script(src="/vendor/angular-aria/angular-aria.min.js")
         script(src="/vendor/angular-material-icons/angular-material-icons.min.js")
         script(src="/vendor/jquery-ui/jquery-ui.min.js")
+        script(src="/vendor/angular-cookies/angular-cookies.min.js")
+        script(src="/vendor/angular-loading-bar/src/loading-bar.js")
+        script(src="/vendor/angular-material-data-table/dist/md-data-table.min.js")
+        script(src="/vendor/angular-messages/angular-messages.min.js")
         // The linker searches for this tag and adds js.  If there's no linker, we point to sails.io.js
         // SCRIPTS
         script(src="/js/dependencies/sails.io.js")
@@ -32,7 +37,11 @@ html
         script(src="/js/app/controller/HomeController.js")
         script(src="/js/app/controller/ItogController.js")
         script(src="/js/app/controller/KasaController.js")
-        script(src="/js/app/controller/SkladController.js")
+        script(src="/js/app/controller/MenuController.js")
+        script(src="/js/app/controller/NaklavController.js")
+        script(src="/js/app/controller/NaklavDialogController.js")
+        script(src="/js/app/controller/PostController.js")
+        script(src="/js/app/controller/PostDialogController.js")
         script(src="/js/app/controller/SpravinController.js")
         script(src="/js/app/controller/SpravinControllerDialog.js")
         script(src="/js/app/controller/SpravkaController.js")
@@ -41,6 +50,8 @@ html
         script(src="/js/app/services/Categories.js")
         script(src="/js/app/services/Ingridients.js")
         script(src="/js/app/services/Items.js")
+        script(src="/js/app/services/Post.js")
+        script(src="/js/app/services/Sklad.js")
         script(src="/js/app/visual/autocomplete.js")
         script(src="/js/test.js")
         // SCRIPTS END

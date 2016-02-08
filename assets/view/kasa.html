@@ -1,10 +1,13 @@
 <!-- Начало шапки -->
-<div class="container-fluid row" ng-include="'view/header.html'">
+<div ng-include="'view/header.html'" ng-controller="MenuController" class="col-lg-2 header">
+
 </div>
+
 <!-- Конец шапки -->
 <!-- Начало контента -->
-<div class="container">
+<div class="col-lg-10 col-lg-offset-2">
     <div class="row">
+    <!-- Menu Button -->
                 <div class="col-lg-5">
                     <button class="md-raised md-primary md-button md-default-theme md-ink-ripple btn btn-primary btn-lg"  data-toggle="modal" data-target="#myModal">
                         <span class="ng-scope">Добавить</span>
@@ -79,4 +82,5 @@
         </div>
     </div>
 </div>
+
 <!-- Конец контента -->

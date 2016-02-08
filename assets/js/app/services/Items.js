@@ -9,6 +9,9 @@
     Items.$inject = ["$resource"];
 
     function Items ($resource) {
-        return $resource ('/Items/:id', {id: '@id'});
+      return {
+          list: $resource ('/Items/list/:id', {id: '@id'}),
+          in: $resource ('/Items/:id', {id: '@id'})
+      };
     }
 })();

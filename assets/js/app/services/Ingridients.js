@@ -6,6 +6,10 @@
     Ingridients.$inject = ["$resource"];
 
     function Ingridients ($resource) {
-        return $resource ('/Ingridients/:id', {id: '@id'});
+        return {
+            list: $resource ('/Ingridients/list/:id', {id: '@id'}),
+            in: $resource ('/Ingridients/:id', {id: '@id'}),
+            auto: $resource ('/Ingridients/auto')
+        };
     }
 })();

@@ -6,6 +6,10 @@
     Categories.$inject = ["$resource"];
 
     function Categories ($resource) {
-        return $resource ('/Categories/:id', {id: '@id'});
+      return {
+          list: $resource ('/Categories/list/:id', {id: '@id'}),
+          in: $resource ('/Categories/:id', {id: '@id'}),
+          auto: $resource ('/Categories/auto')
+      };
     }
 })();

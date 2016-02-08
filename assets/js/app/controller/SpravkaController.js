@@ -8,17 +8,33 @@
     function SpravkaController ($scope, Items, $mdDialog, $rootScope) {
 
 
-        $scope.items = Items.query();
-        $scope.counter = 0;
-        $scope.item = "";
+      $scope.query = {
+        order: "name",
+        limit: 10,
+        page: 1
+      };
 
-        $scope.delete_item = function (item, $index) {
+      $scope.reOrder = function(order) {
+            getDesserts(angular.extend({}, $scope.query, {
+              order: order
+            }));
+      }
 
-        if (!confirm("Дейтсвительно хотите удалить?")) return;
-                item.$remove().then(function(){
-                    $scope.items.splice($index,1);
-                });
-        };
+          $scope.onPaginate = function(page, limit) {
+            getDesserts(angular.extend({}, $scope.query, {
+              page: page,
+              limit: limit
+            }));
+          };
+
+          function getDesserts(query) {
+            $scope.promise = Items.list.get(query || $scope.query, success).$promise;
+          }
+
+          function success(records) {
+            $scope.items = records;
+          }
+          getDesserts();
 
            $scope.add = function (ev) {
              $rootScope.kek = {
@@ -32,52 +48,38 @@
                 parent: angular.element(document.body),
                 targetEvent: ev,
                 clickOutsideToClose: false
-              }).then(function(){
-
-              }, function(err){
-                console.log(err);
-              });
+              }).then(getDesserts);
            };
-
-        $scope.save_item = function () {
-
-            var total_count = 0 ;
-
-            for(var index in $scope.ingri) {
-                total_count = total_count + parseFloat($scope.ingri[index].size);
-            }
-
-            var Item = {
-                "title": $scope.item.title,
-                "components": $scope.ingri,
-                "price": $scope.item.price,
-                "size" : total_count
-            };
-
-            var item = new Items(Item);
-            item.$save().then(function (newItem) {
-                $scope.items.push(newItem);
-                $("#myModal").modal('hide');
-                $scope.newItem="";
-            });
-
-
-        };
-
 
         $scope.delete_input = function (){
             $(this).parent().remove();
         }
-
-        $scope.update_item = function(item, $index) {
-            $("#myModal").modal();
-            $scope.item = {
-                "id" : item.id,
-                "title": item.title,
-                //"components":ingri,
-                "price": item.price
-                };
+        $scope.update_ka = function (ka,ev) {
+          $rootScope.kek = ka;
+           $mdDialog.show({
+             controller: 'SpravkaControllerDialog',
+             templateUrl: 'view/sprav_ka_dialog.html',
+             parent: angular.element(document.body),
+             targetEvent: ev,
+             clickOutsideToClose: false
+           }).then(getDesserts);
         };
+
+        $scope.delete_ka = function (it, ev) {
+              var order = new Items.in(it);
+              var confirm = $mdDialog.confirm()
+                    .title('Вы действительно хотите удалить этот ингредиент?')
+                    .textContent('Это действите не может быть отменено')
+                    .ariaLabel('Удалить')
+                    .targetEvent(ev)
+                    .ok('Да')
+                    .cancel('Нет');
+              $mdDialog.show(confirm).then(function() {
+                order.$remove().then(function(){
+                  getDesserts();
+                });
+              });
+            };
 
     }
 

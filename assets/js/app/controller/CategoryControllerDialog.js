@@ -9,7 +9,7 @@
     }
 
     $scope.save = function () {
-        var category = new Categories($scope.category);
+        var category = new Categories.in($scope.category);
         category.$save().then(function () {
           $scope.cancel();
         },function(err){

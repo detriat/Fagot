@@ -6,17 +6,36 @@
  */
 
 module.exports = {
-    create: function (req, res){
-        var elem = {
-            title : req.param('title'),
-            components : req.param('components'),
-            size : req.param('size'),
-            price : req.param('price')
-        };
+  list: function (req, res) {
+       Items.count().exec(function (err, found) {
+         if (err){
+          console.log(err);
+          return res.send(err);
+         }
+         var len = found;
+       var myQuery = Items.find({});
+       if (typeof(req.param('order') != "undefined")) {
+         if (req.param('order').substring(0,1) == "-"){
+           var sort_string = req.param('order').substring(1,req.param('order').length);
+           myQuery.sort(sort_string+' DESC');
+         }else{
+           myQuery.sort(req.param('order')+' ASC');
+         }
+       }
+       if (typeof(req.param('page')!="undefined") && typeof(req.param('limit')!="undefined")) myQuery.paginate({page: req.param('page'), limit: req.param('limit')});
+       myQuery.exec(function (err, results){
+         if (err){
+           console.log(err);
+           return res.send(err);
+         }
+         var send = {
+           data : results,
+           count : len
+         }
+         return res.send(send);
+      });
 
-        Items.create(elem).exec(function (err, user) {
-            if (err) {return res.send(500);}else{ return res.ok();}
-        });
-    }
+    });
+  }
+
 };
-

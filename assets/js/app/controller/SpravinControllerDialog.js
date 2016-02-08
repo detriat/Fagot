@@ -7,15 +7,35 @@
     $scope.cancel = function () {
       $mdDialog.hide();
     }
-    $scope.categories = Categories.query({});
+      $scope.categories = Categories.in.query({});
+    if (typeof($rootScope.ig)!="undefined")
+      Ingridients.in.get({id:$rootScope.ig},function(item){
+        if (typeof(item.category) != "undefined")
+        Categories.in.get({id:item.category.id},function(cat){
+          item.category = cat;
+          $scope.ingridient = item;
+        });
 
+      })
     $scope.save = function () {
-        var ingri = new Ingridients($scope.ingridient);
+      if ($scope.ingridient.category == null) {
+        alert('Выберите из списка или введите валидный ингридиент');
+        return;
+      }
+        $scope.ingridient.category = $scope.ingridient.category.id;
+        var ingri = new Ingridients.in($scope.ingridient);
         ingri.$save().then(function (newIngri) {
-          $scope.close();
+          $scope.cancel();
         });
     };
 
+    $scope.querySearch = function(query) {
+      return Categories.auto.get({
+        "search": query
+      }).$promise.then(function(result) {
+        return result.data;
+      });
+    }
 
   }
 

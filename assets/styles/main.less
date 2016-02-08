@@ -1,71 +1,93 @@
-body {
-  overflow-x:hidden;
-}
-
 /* Шапка*/
-
+body{
+  background: transparent !important;
+}
 .header {
-  background: #008ABA;
-  color:#ffffff;
   font-family: Roboto;
 }
 md-dialog-content {
   order: 0 !important;
 }
 
-.header ul > li {
-  padding: 10px 15px;
-  list-style-type: none;
-  float: left;
-  font-size: 15px;
+md-select {
+    font-weight: bold !important;
 }
 
-.header >ul > li > a {
-  color:#ffffff;
-  text-decoration: none;
-  cursor: pointer;
+.height_autocomplete {
+  height: 56px;
 }
 
-.header >ul > li > a:link {
-  color:#ffffff;
-  text-decoration: none;
+.header {
+  position: fixed !important;
 }
 
-.header >ul > li > a:visited {
-  color:#ffffff;
-  text-decoration: none;
+body {
+  background-color: #eeeeee !important;
 }
-
-.logo-header {
-  font-size:32px;
-}
-
-.dop-menu li {
-  color: #000000;
-  padding: 5px !important;
-     }
-
 .caret {
   margin-left: 5px !important;
 }
 
 /* Контент */
 
+
+/* Autocom */
+md-autocomplete.md-default-theme, md-autocomplete {
+  background: none !important;
+}
+
+
+
+.md-whiteframe-1dp, .md-whiteframe-z1 {
+  box-shadow:none !important;
+}
+
+/* End Autocom */
+
+
+/* Webkit */
+input::-webkit-input-placeholder {
+   color: transparent !important;
+}
+
+
+input:-moz-placeholder {
+    color: transparent !important;
+}
+
+input::-moz-placeholder {
+    color: transparent !important;
+}
+
+input:-ms-input-placeholder {
+    color: transparent !important;
+}
+
+.label {
+    color: black !important;
+    font-weight: 100 !important;
+  }
+
+md-table-pagination .md-select-value {
+    margin-top: 24px;
+}
+
 .ingridientu {
   margin-top: 20px;
+  padding-left: 0 !important;
 }
 
 .ingridientu > md-whiteframe > div {
   margin: 10px 0;
 }
 
-.col-lg-5 .md-button.md-raised:not([disabled]) {
-  background: #008ABA !important;
+.col-lg-4 .md-button.md-raised:not([disabled]) {
+  background: #050380 !important;
   margin-left: 17px;
 }
 
 a:hover > ng-md-icon {
-  fill:#008ABA !important;
+  fill:#050380 !important;
   text-decoration: none;
 }
 
@@ -75,25 +97,33 @@ a > ng-md-icon {
 
 ng-md-icon {
   float: right;
-  margin-left: 10px !important;
+}
+
+
+a.md-button.md-default-theme.md-primary.md-raised, a.md-button.md-primary.md-raised, a.md-button.md-default-theme.md-primary.md-fab, a.md-button.md-primary.md-fab, .md-button.md-default-theme.md-primary.md-raised, .md-button.md-primary.md-raised, .md-button.md-default-theme.md-primary.md-fab, .md-button.md-primary.md-fab {
+  background: #050380 !important;
 }
 
 md-whiteframe > div {
+      background-color: white;
   padding: 5px 5px;
   box-shadow: 0 1px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12);
 }
 
 .md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused, md-input-container:not(.md-input-invalid).md-input-focused .md-input   {
-  color:#008ABA;
-  border-color: #008ABA;
+  color:#050380;
+  border-color: #050380;
 }
 
 .md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused, md-input-container:not(.md-input-invalid).md-input-focused label   {
-  color:#008ABA;
+  color:#050380;
 }
 
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
+  background:#050380 ;
+}
 .btn-primary {
-  background:#008ABA !important;
+  background:#050380 !important;
 }
 
 .add_icon {
@@ -110,19 +140,83 @@ md-whiteframe > div {
   float: left;
 }
 
-.size_ingri_k {
-  width: 30%;
-  float: left;
+a {
+  text-decoration: none !important;
 }
-
-.delete_ingri_k {
-  float: right;
-  margin-top: 20px;
-}
-
 .price_ingr_k{
   width: 100%;
 }
 .min {
   min-width: 500px;
+}
+
+md-input-container {
+  padding: 1px !important;
+  margin-bottom: 0px !important;
+  margin-top: 5px !important;
+}
+
+md-dialog md-content {
+  padding-top: 22px !important;
+  padding-bottom: 0px !important;
+}
+md-select {
+      margin-bottom: 24px !important;
+}
+.name {
+  font-size: 35px;
+color: white;
+text-align: center;
+margin-top: 20px;
+}
+
+.menu-down {
+  display: none;
+}
+
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  height: 100vh;
+  background: url(../images/menubg.jpg);
+  padding: 0 !important;
+}
+
+
+.sidebar a {
+  color: white;
+}
+
+.sidebar a:hover {
+  text-decoration: none;
+}
+
+
+.sidebar li {
+  list-style: none;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.sidebar > ul > li:hover {
+  background: black;
+  opacity: 0.5;
+}
+
+.sidebar a:hover {
+  color:white;
+}
+
+.sidebar > ul > div >li:hover {
+  background: black;
+  opacity: 0.5;
+}
+
+.sidebar ul {
+  padding-left: 0;
+}
+
+.but-sm {
+  min-width: 10px !important;
 }

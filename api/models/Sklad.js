@@ -6,11 +6,14 @@
 */
 var Sklad = {
     attributes: {
-        category:{
-            type: 'string'
+        post: {
+          model: 'Post'
         },
-        title: {
-            type: 'string'
+        ingri: {
+          model: 'Ingridients'
+        },
+        date: {
+          type: 'date'
         },
         amount: {
             type: 'integer'

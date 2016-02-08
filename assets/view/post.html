@@ -1,0 +1,56 @@
+<!-- Начало шапки -->
+<div ng-include="'view/header.html'" ng-controller="MenuController" class="col-lg-2 header">
+
+</div>
+
+<!-- Конец шапки -->
+<!-- Начало контента -->
+<div class="col-lg-10 row col-lg-offset-2">
+  <div class="row">
+    <div class="col-lg-12 ingridientu ">
+      <md-card>
+        <md-toolbar class="md-table-toolbar md-default">
+          <div class="md-toolbar-tools">
+            <span>Список поставщиков</span>
+            <div flex></div>
+            <md-button data-ng-click="add()" class="but-sm" aria-label='add_cat1'>
+              <ng-md-icon class="button-ico" icon="add_circle_outline" style="fill: black;"></ng-md-icon>
+            </md-button>
+          </div>
+        </md-toolbar>
+        <md-table-container>
+          <table md-table md-progress="promise1">
+            <thead md-head md-order="query1.order" md-on-reorder="reOrder1">
+              <tr md-row>
+                <th md-column md-order-by="title">
+                  <span>Название</span>
+                </th>
+                <th md-column>
+                  <span></span>
+                </th>
+              </tr>
+            </thead>
+            <tbody md-body>
+              <tr md-row ng-repeat="post in posts.data">
+                <td md-cell class="col-lg-11">{{post.name}}</td>
+                <td md-cell ng-click="delete(post)">
+                  <div class="row">
+
+
+                    <md-button class="but-sm pull-right" aria-label='del_cat'>
+                      <ng-md-icon class="button-ico" icon="delete" style="fill: black;"></ng-md-icon>
+                    </md-button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </md-table-container>
+      </md-card>
+
+
+    </div>
+  </div>
+</div>
+
+<!-- Конец контента -->
