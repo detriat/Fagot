@@ -19,7 +19,7 @@
       })
     $scope.save = function () {
       if ($scope.ingridient.category == null) {
-        alert('Выберите из списка или введите валидный ингридиент');
+        alert('Выберите из списка категорию');
         return;
       }
         $scope.ingridient.category = $scope.ingridient.category.id;

@@ -17,13 +17,15 @@
         });
       }
 
-      $scope.recalc = function () {
-        $scope.suma = $scope.naklav.amount * $scope.naklav.price;
+      $scope.recalc = function (ind) {
+        $scope.naim[ind].suma = $scope.naim[ind].amount * $scope.naim[ind].price;
       }
 
-      $scope.ingri_change = function() {
-        if ($scope.naklav.ingri == null) { $scope.naklav.price=""; return; }
-        $scope.naklav.price = $scope.naklav.ingri.price_zak;
+      $scope.ingri_change = function(ind) {
+      //  console.log($scope.it);
+        if ($scope.naim[ind].ingri == null) { $scope.naim[ind].price=""; return; }
+
+        $scope.naim[ind].price = $scope.naim[ind].ingri.price_zak;
       }
 
       $scope.querySearch1 = function(query) {
@@ -34,6 +36,17 @@
         });
       }
 
+      $scope.naim = [];
+      $scope.naim.push({})
+
+      $scope.add_naim = function() {
+        $scope.naim.push({});
+      }
+
+      $scope.delete_input_naim = function(naim) {
+        var index = $scope.naim.indexOf(naim);
+        $scope.naim.splice(index, 1);
+      }
 
       $scope.save = function () {
         if ($scope.naklav.ingri == null) {

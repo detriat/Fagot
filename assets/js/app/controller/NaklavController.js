@@ -52,7 +52,7 @@
       }).then(getDesserts);
     };
 
-    $scope.update_ka = function(ka, ev) {
+    $scope.update = function(ka, ev) {
       $rootScope.kek = ka;
       $mdDialog.show({
         controller: 'NaklavDialogController',
