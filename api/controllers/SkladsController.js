@@ -1,25 +1,20 @@
 /**
- * IngridientsController
+ * SkladController
  *
- * @description :: Server-side logic for managing Ingridients
+ * @description :: Server-side logic for managing sklads
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
 module.exports = {
   list: function (req, res) {
-
-       Ingridients.count().exec(function (err, found) {
+       Sklads.count().exec(function (err, found) {
          if (err){
           console.log(err);
           return res.send(err);
          }
          var len = found;
 
-         if (typeof(req.param('category'))!="undefined") {
-           var myQuery = Ingridients.find({category:req.param('category')});
-         }else{
-           var myQuery = Ingridients.find({});
-         }
+           var myQuery = Sklads.find({});
        if (typeof(req.param('order') != "undefined")) {
          if (req.param('order').substring(0,1) == "-"){
            var sort_string = req.param('order').substring(1,req.param('order').length);
@@ -28,7 +23,7 @@ module.exports = {
            myQuery.sort(req.param('order')+' ASC');
          }
        }
-
+       myQuery.populateAll();
        if (typeof(req.param('page')!="undefined") && typeof(req.param('limit')!="undefined")) myQuery.paginate({page: req.param('page'), limit: req.param('limit')});
        myQuery.exec(function (err, results){
          if (err){
@@ -44,17 +39,15 @@ module.exports = {
 
     });
   },
-  auto : function (req, res){
-    var search = req.param('search');
-    Ingridients.find({ title : {
-      'like' : search+'%'
-    }}).populateAll().exec(function(err, items ){
-      if (err) {sails.log(err); return res.send(err);}
+  ostat : function (req,res){
+    Sklads.find({}).groupBy('ingri').sum('amount').exec(function(err,result){
+    //Sklads.find({Where:{}, groupBy:'ingri', sum: 'amount'}).exec(function(err,result){
+
+      if (err) res.send(err);
       var result = {
-        data: items
+        data: result
       }
-      return res.send(result);
+      res.send(result);
     });
   }
-
 };

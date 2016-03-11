@@ -2,9 +2,9 @@
   'use strict';
 
   var app = angular.module('app').controller('SpravinController', SpravinController);
-  SpravinController.$inject = ["$scope", "Ingridients", "$mdDialog", 'Categories', '$rootScope'];
+  SpravinController.$inject = ["$scope", "Ingridients", "$mdDialog", 'Categories', '$rootScope', "$mdEditDialog"];
 
-  function SpravinController($scope, Ingridients, $mdDialog, Categories, $rootScope) {
+  function SpravinController($scope, Ingridients, $mdDialog, Categories, $rootScope, $mdEditDialog) {
 
     $scope.query = {
       order: "name",
@@ -16,6 +16,9 @@
       limit: 10,
       page: 1
     };
+
+    $scope.selected = [];
+    $scope.filte = [];
     $scope.reOrder = function(order) {
       getDesserts(angular.extend({}, $scope.query, {
         order: order
@@ -62,16 +65,40 @@
 
 
 
+    $scope.editComment = function (event, dessert) {
+       event.stopPropagation(); // in case autoselect is enabled
 
+       var editDialog = {
+         modelValue: dessert.name,
+         placeholder: 'Add a comment',
+         ok: 'Сохранить',
+         cancel: 'Отмена',
+         save: function (input) {
+           dessert.name = input.$modelValue;
+           var cat = new Categories.in(dessert);
+           cat.$save().then(function(){
+
+           });
+         },
+         targetEvent: event,
+         title: 'Название'
+       };
+
+       var promise = $mdEditDialog.large(editDialog);
+       promise.then(function (ctrl) {
+         var input = ctrl.getInput();
+       });
+     };
 
 
     $scope.ingri = "";
     $scope.filter = function(cat, ev) {
+      console.log($scope.selected);
       $scope.query = {
-        order: "name",
+        order: 'name',
         limit: 10,
         page: 1,
-        category: cat
+        category: $scope.selected
       };
       getDesserts();
     }

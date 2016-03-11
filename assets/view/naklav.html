@@ -1,20 +1,19 @@
 <!-- Начало шапки -->
-<div ng-include="'view/header.html'" ng-controller="MenuController" class="col-lg-2 header">
+<section layout="row" flex>
+    <md-sidenav ng-include="'view/header.html'" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" ng-controller="MenuController">
 
-</div>
+    </md-sidenav>
 
-<!-- Конец шапки -->
-<!-- Начало контента -->
-<div class="col-lg-10 col-lg-offset-2">
-  <div class="row">
-    <div class="col-lg-12 ingridientu ">
-      <md-card>
+    <!-- Конец шапки -->
+    <!-- Начало контента -->
+    <md-content layout-padding layout-fill layout-gt-sm="row" layout-align="start start" flex>
+            <md-card flex>
         <md-toolbar class="md-table-toolbar md-default">
           <div class="md-toolbar-tools">
             <span>Список накладных</span>
             <div flex></div>
             <md-button data-ng-click="add()" class="but-sm">
-              <ng-md-icon class="button-ico" icon="add_circle_outline" style="fill: black; margin-top:5px; padding-left:4px;">
+              <ng-md-icon class="button-ico" icon="add_circle_outline">
               </ng-md-icon>Добавить</md-button>
           </div>
         </md-toolbar>
@@ -28,14 +27,11 @@
                 <th md-column md-order-by="post">
                   <span>Поставщик</span>
                 </th>
-                <th md-column md-order-by="ingri">
-                  <span>Название ингредиента</span>
-                </th>
-                <th md-column md-order-by="amount">
-                  <span>Количество</span>
-                </th>
                 <th md-column md-order-by="price">
                   <span>Сумма</span>
+                </th>
+                <th md-column md-order-by="ostatok">
+                  <span>Остаток</span>
                 </th>
                 <th md-column>
                   <span></span>
@@ -44,17 +40,24 @@
             </thead>
             <tbody md-body>
               <tr md-row ng-repeat="naklav in naklavs.data">
-                <td md-cell>{{naklav.date | date: 'dd.mm.yy'}}</td>
-                <td md-cell>{{naklav.post.name}}</td>
-                <td md-cell>{{naklav.ingri.title}}</td>
-                <td md-cell>{{naklav.amount}}</td>
-                <td md-cell>{{naklav.price * naklav.amount}}</td>
+                <td md-cell>{{naklav.date | date: 'dd.MM.yy'}}</td>
+                <td md-cell ng-click="nakladnaya()">{{naklav.post.name}}</td>
+                <td md-cell>{{naklav.suma}}</td>
+                <td md-cell>{{naklav.ostatok}}</td>
                 <td md-cell>
                   <md-menu md-position-mode="target-right target">
                     <md-button aria-label="Open menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
                       <ng-md-icon icon="more_vert" style="fill: black" size="24"></ng-md-icon>
                     </md-button>
                     <md-menu-content width="4">
+                    <md-menu-item>
+                      <md-button data-ng-click="add_opl(naklav)">
+                        <div layout="row">
+                          <p flex="">Оплатить</p>
+                          <ng-md-icon icon="attach_money" style="fill: black" size="24"></ng-md-icon>
+                        </div>
+                      </md-button>
+                    </md-menu-item>
                       <md-menu-item>
                         <md-button data-ng-click="update(naklav)">
                           <div layout="row">
@@ -80,7 +83,7 @@
         </md-table-container>
         <md-table-pagination md-Options='[10, 20, 50]' md-limit="query.limit" md-page="query.page" md-total="{{naklavs.count}}" md-on-paginate="onPaginate" md-page-select></md-data-table-pagination>
       </md-card>
-    </div>
-  </div>
-</div>
+
+</md-content>
+</section>
 <!-- Конец контента -->

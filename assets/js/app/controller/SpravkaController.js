@@ -6,7 +6,7 @@
 
     SpravkaController.$inject = ["$scope", "Items", "$mdDialog", "$rootScope"];
     function SpravkaController ($scope, Items, $mdDialog, $rootScope) {
-
+  $scope.selected = [];
 
       $scope.query = {
         order: "name",
@@ -50,6 +50,16 @@
                 clickOutsideToClose: false
               }).then(getDesserts);
            };
+
+        $scope.kokt = function(ev) {
+          $mdDialog.show({
+            controller: 'KoktDialogController',
+            templateUrl: 'view/kokt_dialog.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose: false
+          }).then(getDesserts);
+        }
 
         $scope.delete_input = function (){
             $(this).parent().remove();

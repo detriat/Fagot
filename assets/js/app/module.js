@@ -21,7 +21,6 @@
             .when('/',{
             templateUrl: "view/home.html",
             controller: 'HomeController'
-
             })
             .when('/ingri',{
 
@@ -57,6 +56,18 @@
 
                 templateUrl: "view/post.html",
                 controller: "PostController"
+
+            })
+            .when('/sklad',{
+
+                templateUrl: "view/sklad.html",
+                controller: "SkladController"
+
+            })
+            .when('/dolg',{
+
+                templateUrl: "view/dolg.html",
+                controller: "DolgController"
 
             })
             .otherwise({

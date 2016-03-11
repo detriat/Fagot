@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('app').controller('NaklavController', NaklavController);
-  NaklavController.$inject = ["$scope", "$rootScope", "$mdDialog", "Sklad"];
+  NaklavController.$inject = ["$scope", "$rootScope", "$mdDialog", "Naklavs", "Sklad"];
 
-  function NaklavController($scope, $rootScope, $mdDialog, Sklad) {
+  function NaklavController($scope, $rootScope, $mdDialog, Naklavs, Sklad) {
 
     $scope.query = {
       order: "name",
@@ -26,10 +26,19 @@
     };
 
     function getDesserts(query) {
-      $scope.promise = Sklad.list.get(query || $scope.query, success).$promise;
+      $scope.promise = Naklavs.list.get(query || $scope.query, success).$promise;
     }
 
     function success(records) {
+
+      records.data.forEach(function(item){
+        var suma = 0;
+        item.naim.forEach(function(it){
+          suma += (it.amount * it.price);
+        });
+        item.suma = suma;
+      })
+
       $scope.naklavs = records;
     }
     getDesserts();
@@ -38,10 +47,6 @@
       $rootScope.kek = {
         "id": '',
         "date": '',
-        "post": '',
-        "ingri":'',
-        "amount":'',
-        "price":''
       }
       $mdDialog.show({
         controller: 'NaklavDialogController',
@@ -51,6 +56,19 @@
         clickOutsideToClose: false
       }).then(getDesserts);
     };
+
+
+        $scope.add_opl = function(id, ev) {
+          $rootScope.kok = id;
+          $mdDialog.show({
+            controller: 'NaklavOplDialogController',
+            templateUrl: 'view/naklav_opl_dialog.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose: false
+          }).then(getDesserts);
+        };
+
 
     $scope.update = function(ka, ev) {
       $rootScope.kek = ka;
@@ -63,8 +81,20 @@
       }).then(getDesserts);
     };
 
+    $scope.nakladnaya = function(ev) {
+      $mdDialog.show({
+        templateUrl: 'view/nakladnaya_dialog.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: false
+      }).then(getDesserts);
+    }
+
+
     $scope.delete = function(it, ev) {
-      var order = new Sklad.in(it);
+      var order = new Naklavs.in(it);
+
+
       var confirm = $mdDialog.confirm()
         .title('Вы действительно хотите удалить эту накладную?')
         .textContent('Это действите не может быть отменено')
@@ -74,6 +104,10 @@
         .cancel('Нет');
       $mdDialog.show(confirm).then(function() {
         order.$remove().then(function() {
+          order.naim.forEach(function(naim){
+            var nai = new Sklad.in(naim);
+            nai.$remove().then();
+          });
           getDesserts();
         });
       });

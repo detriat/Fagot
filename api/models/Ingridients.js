@@ -23,6 +23,9 @@ var Ingridients = {
         },
         size: {
             type: 'integer'
+        },
+        rating: {
+           type: 'integer'
         }
     }
 }

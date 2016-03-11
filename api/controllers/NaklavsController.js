@@ -1,20 +1,20 @@
 /**
- * SkladController
+ * NaklavController
  *
- * @description :: Server-side logic for managing sklads
+ * @description :: Server-side logic for managing Naklavs
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
 module.exports = {
-  list: function (req, res) {
-       Sklad.count().exec(function (err, found) {
+	list: function (req, res) {
+       Naklavs.count().exec(function (err, found) {
          if (err){
           console.log(err);
           return res.send(err);
          }
          var len = found;
 
-           var myQuery = Sklad.find({});
+           var myQuery = Naklavs.find({});
        if (typeof(req.param('order') != "undefined")) {
          if (req.param('order').substring(0,1) == "-"){
            var sort_string = req.param('order').substring(1,req.param('order').length);

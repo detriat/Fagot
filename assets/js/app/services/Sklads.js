@@ -7,8 +7,9 @@
 
     function Sklad ($resource) {
       return {
-          list: $resource ('/Sklad/list/:id', {id: '@id'}),
-          in: $resource ('/Sklad/:id', {id: '@id'})
+          list: $resource ('/Sklads/list/:id', {id: '@id'}),
+          in: $resource ('/Sklads/:id', {id: '@id'}),
+          ostat: $resource ('/Sklads/ostat/:id', {id: '@id'})
       };
     }
 })();

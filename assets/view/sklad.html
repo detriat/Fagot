@@ -10,7 +10,39 @@
             <md-card flex>
         <md-toolbar class="md-table-toolbar md-default">
           <div class="md-toolbar-tools">
-            <span>Список поставщиков</span>
+            <span>Склад</span>
+            <div flex></div>
+          </div>
+        </md-toolbar>
+        <md-table-container>
+          <table md-table md-progress="promise1">
+            <thead md-head md-order="query1.order" md-on-reorder="reOrder1">
+              <tr md-row>
+                <th md-column md-order-by="title">
+                  <span>Название</span>
+                </th>
+                <th md-column md-order-by="amount">
+                  <span>Количество</span>
+                </th>
+                <th md-column>
+                  <span></span>
+                </th>
+              </tr>
+            </thead>
+            <tbody md-body>
+              <tr md-row ng-repeat="sklad in sklads.data">
+                <td md-cell class="col-lg-11">{{sklad.ingri.title}}</td>
+                <td md-cell class="col-lg-11">{{sklad.amount}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </md-table-container>
+      </md-card>
+
+      <md-card style="display:none;">
+        <md-toolbar class="md-table-toolbar md-default">
+          <div class="md-toolbar-tools">
+            <span>Список  ингридиентов</span>
             <div flex></div>
             <md-button data-ng-click="add()" class="but-sm" aria-label='add_cat1'>
               <ng-md-icon class="button-ico" icon="add_circle_outline" style="fill: black;"></ng-md-icon>
@@ -30,12 +62,16 @@
               </tr>
             </thead>
             <tbody md-body>
-              <tr md-row ng-repeat="post in posts.data">
-                <td md-cell>{{post.name}}</td>
-                <td md-cell ng-click="delete(post)">
+              <tr md-row ng-repeat="sklad in sklads.data">
+                <td md-cell class="col-lg-11">{{sklad.ingri.title}}</td>
+                <td md-cell ng-click="delete(sklad)">
+                  <div class="row">
+
+
                     <md-button class="but-sm pull-right" aria-label='del_cat'>
                       <ng-md-icon class="button-ico" icon="delete" style="fill: black;"></ng-md-icon>
                     </md-button>
+                  </div>
                 </td>
               </tr>
             </tbody>
@@ -43,7 +79,7 @@
         </md-table-container>
       </md-card>
 
+</md-content>
+</section>
 
-      </md-content>
-      </section>
 <!-- Конец контента -->

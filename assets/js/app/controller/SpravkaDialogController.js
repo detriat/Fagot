@@ -14,6 +14,7 @@
         var pr_ml = Number(item.name.price) / item.name.size;
         $scope.summa += Number(pr_ml * item.kolvo);
       });
+      $scope.summa = $scope.summa.toFixed(2);
     }
     $scope.prop = [];
     if (typeof($scope.item.ingri) != 'undefined') {
@@ -26,6 +27,7 @@
             kolvo: item.kolvo
           }
           $scope.prop.push(igr);
+          $scope.recalc();
         });
       })
     } else {

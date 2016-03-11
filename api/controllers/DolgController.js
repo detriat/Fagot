@@ -1,25 +1,19 @@
 /**
- * IngridientsController
+ * CategoriesController
  *
- * @description :: Server-side logic for managing Ingridients
+ * @description :: Server-side logic for managing categories
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
 module.exports = {
-  list: function (req, res) {
-
-       Ingridients.count().exec(function (err, found) {
+	list: function (req, res) {
+       Dolg.count().exec(function (err, found) {
          if (err){
           console.log(err);
           return res.send(err);
          }
          var len = found;
-
-         if (typeof(req.param('category'))!="undefined") {
-           var myQuery = Ingridients.find({category:req.param('category')});
-         }else{
-           var myQuery = Ingridients.find({});
-         }
+       var myQuery = Dolg.find({});
        if (typeof(req.param('order') != "undefined")) {
          if (req.param('order').substring(0,1) == "-"){
            var sort_string = req.param('order').substring(1,req.param('order').length);
@@ -28,7 +22,6 @@ module.exports = {
            myQuery.sort(req.param('order')+' ASC');
          }
        }
-
        if (typeof(req.param('page')!="undefined") && typeof(req.param('limit')!="undefined")) myQuery.paginate({page: req.param('page'), limit: req.param('limit')});
        myQuery.exec(function (err, results){
          if (err){
@@ -42,18 +35,6 @@ module.exports = {
          return res.send(send);
       });
 
-    });
-  },
-  auto : function (req, res){
-    var search = req.param('search');
-    Ingridients.find({ title : {
-      'like' : search+'%'
-    }}).populateAll().exec(function(err, items ){
-      if (err) {sails.log(err); return res.send(err);}
-      var result = {
-        data: items
-      }
-      return res.send(result);
     });
   }
 
