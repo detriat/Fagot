@@ -41,9 +41,9 @@
             <tbody md-body>
               <tr md-row ng-repeat="naklav in naklavs.data">
                 <td md-cell>{{naklav.date | date: 'dd.MM.yy'}}</td>
-                <td md-cell ng-click="nakladnaya()">{{naklav.post.name}}</td>
+                <td md-cell ng-click="nakladnaya(naklav)">{{naklav.post.name}}</td>
                 <td md-cell>{{naklav.suma}}</td>
-                <td md-cell>{{naklav.ostatok}}</td>
+                <td md-cell><span class="nak_ost">{{naklav.ostatok}}</span></td>
                 <td md-cell>
                   <md-menu md-position-mode="target-right target">
                     <md-button aria-label="Open menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">

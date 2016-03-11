@@ -37,6 +37,18 @@
           suma += (it.amount * it.price);
         });
         item.suma = suma;
+
+        if (typeof(item.balance) != "undefined") {
+          var oplat = 0;
+          item.balance.forEach(function(iy){
+            oplat += Number(iy.suma);
+          });
+          item.ostatok = item.suma - oplat;
+        }else{
+          item.ostatok = item.suma;
+        }
+
+
       })
 
       $scope.naklavs = records;
@@ -81,8 +93,10 @@
       }).then(getDesserts);
     };
 
-    $scope.nakladnaya = function(ev) {
+    $scope.nakladnaya = function(ka, ev) {
+      $rootScope.kek = ka;
       $mdDialog.show({
+        controller: 'NaklavDialogController',
         templateUrl: 'view/nakladnaya_dialog.html',
         parent: angular.element(document.body),
         targetEvent: ev,
@@ -93,8 +107,6 @@
 
     $scope.delete = function(it, ev) {
       var order = new Naklavs.in(it);
-
-
       var confirm = $mdDialog.confirm()
         .title('Вы действительно хотите удалить эту накладную?')
         .textContent('Это действите не может быть отменено')

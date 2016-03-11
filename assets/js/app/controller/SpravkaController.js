@@ -51,9 +51,10 @@
               }).then(getDesserts);
            };
 
-        $scope.kokt = function(ev) {
+        $scope.kokt = function(ka,ev) {
+          $rootScope.kek = ka;
           $mdDialog.show({
-            controller: 'KoktDialogController',
+            controller: 'SpravkaControllerDialog',
             templateUrl: 'view/kokt_dialog.html',
             parent: angular.element(document.body),
             targetEvent: ev,

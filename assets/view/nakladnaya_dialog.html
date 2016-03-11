@@ -1,33 +1,36 @@
-<div class="kokt_block">
-  <md-toolbar>
-    <div class="md-toolbar-tools">
-      <h2>Накладная</h2>
-      <span flex></span>
-      <md-button class="md-icon-button" ng-click="cancel()" aria-label="close">
-        <ng-md-icon icon="close" size="24" style="fill: white"></ng-md-icon>
-      </md-button>
+<md-dialog aria-label="New order" class="neworder" ng-cloak>
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Накладная</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()" aria-label="close">
+          <ng-md-icon icon="close" size="24" style="fill: white"></ng-md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <div layout-gt-sm="row">
+      <div class="padding-10px">
+        {{naklav.date | date: 'dd.MM.yy'}}
+      </div>
+        <div class="md-block" flex></div>
+      <div class="padding-10px">
+        {{naklav.post.name}}
+      </div>
     </div>
-  </md-toolbar>
-  <div class="col-lg-2">
-    23.03.2016
-  </div>
-  <div class="col-lg-1 col-lg-offset-9">
-    АТБ
-  </div>
-  <div class="col-lg-12">
     <table md-table md-progress="promise1">
       <thead md-head md-order="query1.order" md-on-reorder="reOrder1">
         <tr md-row>
           <th md-column md-order-by="title">
             <span>Название</span>
           </th>
-          <th md-column md-order-by="title">
+          <th md-column md-order-by="price">
             <span>Цена</span>
           </th>
-          <th md-column md-order-by="title">
+          <th md-column md-order-by="amount">
             <span>Количество</span>
           </th>
-          <th md-column md-order-by="title">
+          <th md-column md-order-by="suma">
             <span>Сумма</span>
           </th>
           <th md-column>
@@ -36,26 +39,16 @@
         </tr>
       </thead>
       <tbody md-body>
-        <tr md-row >
-          <td md-cell class="col-lg-11">Ку</td>
-          <td md-cell class="col-lg-11">Ку1</td>
-          <td md-cell class="col-lg-11">Ку2</td>
-          <td md-cell class="col-lg-11">Ку2</td>
-
+        <tr md-row data-ng-repeat="it in naim">
+          <td md-cell>{{it.ingri.title}}</td>
+          <td md-cell>{{it.price}}</td>
+          <td md-cell>{{it.amount}}</td>
+          <td md-cell>{{it.suma}}</td>
         </tr>
-
-          <tr md-row >
-            <td md-cell class="col-lg-11">Ку</td>
-            <td md-cell class="col-lg-11">Ку1</td>
-            <td md-cell class="col-lg-11">Ку2</td>
-            <td md-cell class="col-lg-11">Ку2</td>
-
-          </tr>
       </tbody>
     </table>
-  </div>
-  <div class="col-lg-12  zag_kokt">
-    <span>Сумма накладаной:</span>
+    <div class="padding-10px zag_kokt">
+      <span>Сумма накладаной: {{naklav.suma}}</span>
     </div>
-
-</div>
+  </form>
+</md-dialog>

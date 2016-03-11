@@ -34,7 +34,7 @@
                           </thead>
                           <tbody md-body>
                             <tr md-row ng-repeat="item in items.data" >
-                              <td md-cell ng-click="kokt()">{{item.title}}</td>
+                              <td md-cell ng-click="kokt(item)">{{item.title}}</td>
                               <td md-cell>{{item.price}}</td>
                               <td md-cell>
                                 <md-menu md-position-mode="target-right target">

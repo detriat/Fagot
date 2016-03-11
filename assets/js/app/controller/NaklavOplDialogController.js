@@ -9,17 +9,18 @@
       id: $rootScope.kok.id
     }
 
-    $scope.opl = {};
+    $scope.oplata = {
+      date:  new Date()
+    };
     $scope.oplatas = $rootScope.kok.balance;
-    if ($rootScope.kok.balance.length == 0) $scope.oplatas = [];
+    if (typeof($rootScope.kok.balance) == "undefined") $scope.oplatas = [];
 
     $scope.cancel = function () {
       $mdDialog.hide();
     }
-
     $scope.save = function () {
       $scope.nakl.balance = $scope.oplatas;
-      console.log($scope.nakl);
+
         var opl = new Naklavs.in($scope.nakl);
         opl.$save().then(function () {
           $scope.cancel();
@@ -29,12 +30,19 @@
     };
 
     $scope.opl = function() {
-      $scope.oplatas.push($scope.opl);
-      $scope.opl = {};
+      $scope.oplatas.push($scope.oplata);
+      $scope.oplata = {
+        date:  new Date()
+      };
+
     }
 
-      $scope.opl.date = new Date();
 
+
+    $scope.delete = function (opl) {
+      var index = $scope.oplatas.indexOf(opl);
+      $scope.oplatas.splice(index, 1);
+    }
   }
 
 
