@@ -11,7 +11,8 @@
     function Items ($resource) {
       return {
           list: $resource ('/Items/list/:id', {id: '@id'}),
-          in: $resource ('/Items/:id', {id: '@id'})
+          in: $resource ('/Items/:id', {id: '@id'}),
+          auto: $resource ('/Items/auto')
       };
     }
 })();
