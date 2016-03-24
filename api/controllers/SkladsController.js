@@ -40,7 +40,7 @@ module.exports = {
     });
   },
   ostat : function (req,res){
-    Sklads.find({}).groupBy('ingri').sum('amount').exec(function(err,result){
+    Sklads.find({}).populateAll().groupBy('ingri').sum('amount').exec(function(err,result){
     //Sklads.find({Where:{}, groupBy:'ingri', sum: 'amount'}).exec(function(err,result){
 
       if (err) res.send(err);

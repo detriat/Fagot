@@ -31,7 +31,7 @@
             </thead>
             <tbody md-body>
               <tr md-row ng-repeat="post in posts.data">
-                <td md-cell>{{post.name}}</td>
+                <td md-cell class="td-width" ng-click="editComment($event, post)">{{post.name}}</td>
                 <td md-cell ng-click="delete(post)">
                     <md-button class="but-sm pull-right" aria-label='del_cat'>
                       <ng-md-icon class="button-ico" icon="delete" style="fill: black;"></ng-md-icon>

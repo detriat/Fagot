@@ -2,9 +2,9 @@
   'use strict';
 
   var app = angular.module('app').controller('PostController', PostController);
-  PostController.$inject = ["$scope", "Post", "$mdDialog", '$rootScope'];
+  PostController.$inject = ["$scope", "Post", "$mdDialog", '$rootScope', '$mdEditDialog'];
 
-  function PostController($scope, Post, $mdDialog, $rootScope) {
+  function PostController($scope, Post, $mdDialog, $rootScope,$mdEditDialog) {
 
     $scope.query = {
       order: "name",
@@ -62,7 +62,30 @@ $scope.add = function(ev) {
         });
       });
     };
+    $scope.editComment = function (event, dessert) {
+       event.stopPropagation(); // in case autoselect is enabled
 
+       var editDialog = {
+         modelValue: dessert.name,
+         placeholder: 'Add a comment',
+         ok: 'Сохранить',
+         cancel: 'Отмена',
+         save: function (input) {
+           dessert.name = input.$modelValue;
+           var cat = new Post.in(dessert);
+           cat.$save().then(function(){
+
+           });
+         },
+         targetEvent: event,
+         title: 'Название'
+       };
+
+       var promise = $mdEditDialog.large(editDialog);
+       promise.then(function (ctrl) {
+         var input = ctrl.getInput();
+       });
+     };
 
   }
 

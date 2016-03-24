@@ -1,0 +1,14 @@
+(function(){
+    'use strict';
+
+    angular.module('app').factory('Orders', Orders);
+
+    Orders.$inject = ["$resource"];
+
+    function Orders ($resource) {
+      return {
+          list: $resource ('/Orders/list/:id', {id: '@id'}),
+          in: $resource ('/Orders/:id', {id: '@id'})
+      };
+    }
+})();

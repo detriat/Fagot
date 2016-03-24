@@ -26,11 +26,12 @@ var Items = {
         },
         price: {
             type: 'integer'
+        },
+        visible: {
+            type: 'boolean',
+            defaultsTo: true
         }
     }
-};
+  };
 
 module.exports = Items;
-
-
-

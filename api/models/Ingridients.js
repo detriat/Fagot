@@ -1,9 +1,9 @@
 /**
-* Ingridients.js
-*
-* @description :: TODO: You might write a short summary of how this model works and what it represents here.
-* @docs        :: http://sailsjs.org/#!documentation/models
-*/
+ * Ingridients.js
+ *
+ * @description :: TODO: You might write a short summary of how this model works and what it represents here.
+ * @docs        :: http://sailsjs.org/#!documentation/models
+ */
 
 /**
  * Users.js
@@ -14,20 +14,33 @@
  /**  */
 
 var Ingridients = {
-    attributes: {
-        title: {
-            type: 'string'
-        },
-        category: {
-            model: 'categories'
-        },
-        size: {
-            type: 'integer'
-        },
-        rating: {
-           type: 'integer'
-        }
+  attributes: {
+    title: {
+      type: 'string'
+    },
+    category: {
+      model: 'categories'
+    },
+    size: {
+      type: 'integer'
+    },
+    rating: {
+      type: 'integer'
     }
+  },
+  beforeCreate: function(values, next) {
+    var item = {
+      title: values.title,
+      price: values.price,
+      visible: false
+    }
+
+    Items.create(item).exec(function(err, item) {
+      if (err) res.send(500, err);
+    });
+
+    next();
+  }
 }
 
 module.exports = Ingridients;

@@ -7,13 +7,13 @@
 
 module.exports = {
   list: function (req, res) {
-       Items.count().exec(function (err, found) {
+       Items.count({visible:true}).exec(function (err, found) {
          if (err){
           console.log(err);
           return res.send(err);
          }
          var len = found;
-       var myQuery = Items.find({});
+       var myQuery = Items.find({visible:true});
        if (typeof(req.param('order') != "undefined")) {
          if (req.param('order').substring(0,1) == "-"){
            var sort_string = req.param('order').substring(1,req.param('order').length);

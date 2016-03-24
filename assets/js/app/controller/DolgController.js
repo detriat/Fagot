@@ -64,6 +64,21 @@ $scope.add = function(ev) {
     };
 
 
+    $scope.cancel = function() {
+      $mdDialog.hide();
+    }
+
+
+    $scope.querySearch = function(query) {
+      return Dolg.auto.get({
+        "search": query
+      }).$promise.then(function(result) {
+        return result.data;
+      });
+    }
+
+
+
   }
 
 })();
