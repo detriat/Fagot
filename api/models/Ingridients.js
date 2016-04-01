@@ -29,9 +29,10 @@ var Ingridients = {
     }
   },
   beforeCreate: function(values, next) {
+    var pr = Number(values.price)/(Number(values.size));
     var item = {
       title: values.title,
-      price: values.price,
+      price: pr.toFixed(2),
       visible: false
     }
 
@@ -40,6 +41,11 @@ var Ingridients = {
     });
 
     next();
+  },
+  afterDestroy: function(values, next) {
+    Items.destroy({title: values[0].title}).exec(function(err, item){
+      next();
+    });
   }
 }
 

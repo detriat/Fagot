@@ -45,7 +45,7 @@
     }
 
     $scope.naim = [];
-    $scope.naklav = $rootScope.kek;
+    $scope.naklav = $rootScope.kek
     if ($scope.naklav.date != '') {
       $scope.naklav.date = new Date($scope.naklav.date);
     } else {
@@ -59,7 +59,7 @@
         }, function(res) {
           var igr = {
             ingri: res,
-            amount: item.amount,
+            amount: item.amount/res.size,
             price: item.price
           }
           $scope.naim.push(igr);
@@ -111,6 +111,7 @@
     function saver() {
       $scope.naklav.naim = [];
       $scope.naim.forEach(function(p) {
+
           if (p.ingri == null || p.price == "" || p.amount == "") {} else {
             if (p.ingri == null) {
               alert('Выберите из списка или введите валидный ингридиент');
@@ -119,8 +120,9 @@
             var naim = {
               ingri: p.ingri.id,
               price: p.price,
-              amount: p.amount,
-              naklav: $scope.naklav.id
+              amount: p.amount*p.ingri.size,
+              naklav: $scope.naklav.id,
+              kolvo: p.amount
             }
             var nai = new Sklad.in(naim);
             nai.$save().then(function(nai) {

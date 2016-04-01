@@ -8,7 +8,9 @@
 module.exports = {
 
   attributes: {
-
+    paid: {
+      type: 'Boolean',
+      defaultsTo: true
+    }
   }
 };
-

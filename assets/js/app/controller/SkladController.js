@@ -31,6 +31,14 @@
 
     function success(records) {
       $scope.sklads = records;
+      $scope.sklads.data.forEach(function(item){
+        var koef = item.amount/item.ingri.size;
+        if (koef.toFixed() == 0) {item.ostatok = koef*1000 + " мл";}else{
+          item.ostatok = koef.toFixed() + " бут." + " (" + item.ingri.size+")";
+          if (koef - koef.toFixed() != 0) item.ostatok+= " + " + ((koef - koef.toFixed()) * 1000).toFixed() + " мл";
+        }
+
+      })
     }
     getDesserts();
 

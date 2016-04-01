@@ -10,8 +10,15 @@
       $scope.query = {
 
       };
-      $scope.buys = [];
 
+      $scope.query1 = {
+        order: 'paid',
+        limit: 10,
+        page: 1
+      };
+      $scope.zakaz = {
+        buys: []
+      }
 
       function getDesserts1(query) {
         $scope.promise = Items.in.query(query || $scope.query, success1).$promise;
@@ -21,8 +28,31 @@
         $scope.kokts = records;
       }
 
-      getDesserts1();
+      function getDesserts(query) {
+        $scope.promise = Orders.list.get(query || $scope.query1, success).$promise;
+      }
 
+      function success(records) {
+        $scope.orders = records;
+        $scope.orders.data.forEach(function(buy){
+          buy.suma = 0;
+          buy.buys.forEach(function(b){
+            buy.suma += Number(b.price)*Number(b.kolvo);
+          })
+          buy.suma = buy.suma.toFixed(2);
+        });
+      }
+
+      function recalc () {
+        $scope.zakaz.suma = 0;
+        $scope.zakaz.buys.forEach(function(buy){
+          buy.pidsuma=(buy.price*buy.kolvo);
+          $scope.zakaz.suma+=buy.pidsuma;
+        });
+        }
+
+      getDesserts1();
+      getDesserts();
 
       $scope.querySearch = function(query) {
         return Items.auto.get({
@@ -31,13 +61,27 @@
           return result.data;
         });
       }
+
       $scope.save = function() {
+        var arr = [];
+        $scope.zakaz.buys.forEach(function(zak){
+          var obj = {
+            id : zak.id,
+            price: zak.price,
+            kolvo: zak.kolvo
+          }
+          arr.push(arr);
+        });
         var order = {
-          buys : $scope.buys
-        }
+          buys: $scope.zakaz.buys
+        };
         var or = new Orders.in(order);
         or.$save().then(function () {
-          $scope.cancel();
+          getDesserts();
+          $scope.zakaz = {
+            id: "",
+            buys: []
+          };
         },function(err){
           console.log(err);
         });
@@ -45,27 +89,52 @@
 
       $scope.new = function () {
         $scope.zakaz = {
-          id: ""
+          id: "",
+          buys: []
         }
       }
 
       $scope.buy = function(kok) {
-        if (kok.visible) {
-          kok.kolvo = 1;
-        }else{
-            kok.kolvo = 50;
+        var obj = {
+          id: kok.id,
+          title: kok.title,
+          price: kok.price
         }
 
-        $scope.buys.push(kok);
+
+        if (kok.visible==true) {
+          obj.kolvo = 1;
+        }else{
+          obj.kolvo = 50;
+        }
+
+        $scope.zakaz.buys.push(obj);
+        recalc();
       }
+
       $scope.delete_buy = function(kok) {
-        var index = $scope.kok.indexOf(kok);
-        $scope.kok.splice(index, 1);
+        var index = $scope.zakaz.buys.indexOf(kok);
+        $scope.zakaz.buys.splice(index, 1);
       }
+
+      $scope.delete_zak = function(it, ev) {
+        var order = new Orders.in(it);
+        var confirm = $mdDialog.confirm()
+          .title('Вы действительно хотите удалить этот ингредиент?')
+          .textContent('Это действите не может быть отменено')
+          .ariaLabel('Удалить')
+          .targetEvent(ev)
+          .ok('Да')
+          .cancel('Нет');
+        $mdDialog.show(confirm).then(function() {
+          order.$remove().then(function() {
+            getDesserts();
+          });
+        });
+      };
 
       $scope.editComment = function (event, dessert) {
          event.stopPropagation(); // in case autoselect is enabled
-
          var editDialog = {
            modelValue: dessert.kolvo,
            placeholder: 'Add a comment',
@@ -88,7 +157,7 @@
        $scope.add_dolg = function(ev) {
          $rootScope.ig = {};
          $mdDialog.show({
-           controller: 'DolgController',
+           controller: 'DolgKasaDialogController',
            templateUrl: 'view/dolg_kasa_dialog.html',
            parent: angular.element(document.body),
            targetEvent: ev,
@@ -96,10 +165,30 @@
          }).then(getDesserts);
        };
 
-       $scope.opl = function () {
-         $scope.zakaz = {
-           id: ""
+       $scope.bezopl = function () {
+         var arr = [];
+         $scope.zakaz.buys.forEach(function(zak){
+           var obj = {
+             id : zak.id,
+             price: zak.price,
+             kolvo: zak.kolvo
+           }
+           arr.push(arr);
+         });
+         var order = {
+           buys: $scope.zakaz.buys,
+           paid: false
          };
+         var or = new Orders.in(order);
+         or.$save().then(function () {
+           getDesserts();
+           $scope.zakaz = {
+             id: "",
+             buys: []
+           };
+         },function(err){
+           console.log(err);
+         });
 
 
        }

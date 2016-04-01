@@ -34,7 +34,7 @@
       records.data.forEach(function(item){
         var suma = 0;
         item.naim.forEach(function(it){
-          suma += (it.amount * it.price);
+          suma += (it.kolvo * it.price);
         });
         item.suma = suma;
 

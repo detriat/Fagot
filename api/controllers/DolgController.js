@@ -36,6 +36,18 @@ module.exports = {
       });
 
     });
+  },
+  auto : function (req, res){
+    var search = req.param('search');
+  	Dolg.find({ name : {
+      'like' : search+'%'
+    }}).populateAll().exec(function(err, items ){
+      if (err) {sails.log(err); return res.send(err);}
+      var result = {
+        data: items
+      }
+      return res.send(result);
+    });
   }
 
 };

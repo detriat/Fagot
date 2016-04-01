@@ -25,7 +25,7 @@ var Items = {
             type: 'integer'
         },
         price: {
-            type: 'integer'
+            type: 'float'
         },
         visible: {
             type: 'boolean',
