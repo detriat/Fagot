@@ -54,22 +54,21 @@ module.exports = {
               ingri: itm[0],
               amount: item.amount
             }
-
-
             callback(err, resu);
           });
         }
         tasks.push(func);
       });
-      async.parallel(tasks, function(err,results){
+      async.parallel(tasks, function(err, results) {
         var me = {
           data: results
         }
-          res.send(200, me);
+        res.send(200, me);
       });
       //Sklads.find({Where:{}, groupBy:'ingri', sum: 'amount'}).exec(function(err,result){
 
 
     });
   }
-};
+
+}

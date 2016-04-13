@@ -1,13 +1,15 @@
 <!-- Начало шапки -->
 <section layout="row" flex>
-    <md-sidenav ng-include="'view/header.html'" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" ng-controller="MenuController">
+  <md-sidenav ng-include="'view/header.html'" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" ng-controller="MenuController">
 
-    </md-sidenav>
+  </md-sidenav>
 
-    <!-- Конец шапки -->
-    <!-- Начало контента -->
-    <md-content layout-padding layout-fill layout-gt-sm="row" layout-align="start start" flex>
-            <md-card flex>
+  <!-- Конец шапки -->
+  <!-- Начало контента -->
+  <md-content layout-padding layout-fill layout-gt-sm="column" flex>
+
+    <div layout-gt-sm="row">
+      <md-card flex="100">
         <md-toolbar class="md-table-toolbar md-default">
           <div class="md-toolbar-tools">
             <span>Склад</span>
@@ -38,8 +40,9 @@
           </table>
         </md-table-container>
       </md-card>
-
-      <md-card style="display:none;">
+    </div>
+    <div layout-gt-sm="row">
+      <md-card flex="100">
         <md-toolbar class="md-table-toolbar md-default">
           <div class="md-toolbar-tools">
             <span>Список  ингридиентов</span>
@@ -62,24 +65,16 @@
               </tr>
             </thead>
             <tbody md-body>
-              <tr md-row ng-repeat="sklad in sklads.data">
+              <tr md-row ng-repeat="sklad in log.data" ng-class=" {'trgreen': sklad.type, 'trred':!sklad.type}">
                 <td md-cell class="col-lg-11">{{sklad.ingri.title}}</td>
-                <td md-cell ng-click="delete(sklad)">
-                  <div class="row">
-
-
-                    <md-button class="but-sm pull-right" aria-label='del_cat'>
-                      <ng-md-icon class="button-ico" icon="delete" style="fill: black;"></ng-md-icon>
-                    </md-button>
-                  </div>
-                </td>
+                <td md-cell class="col-lg-11">{{sklad.sum}}</td>
               </tr>
             </tbody>
           </table>
         </md-table-container>
       </md-card>
-
-</md-content>
+    </div>
+  </md-content>
 </section>
 
 <!-- Конец контента -->

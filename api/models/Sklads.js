@@ -6,9 +6,6 @@
 */
 var Sklad = {
     attributes: {
-      naklav: {
-        model: 'Naklavs'
-      },
       ingri: {
         model: 'Ingridients'
       },
@@ -17,6 +14,9 @@ var Sklad = {
       },
       amount: {
         type: 'integer'
+      },
+      naklav: {
+        model: "Naklavs"
       }
     }
 }
