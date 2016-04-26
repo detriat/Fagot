@@ -40,8 +40,13 @@ module.exports = {
       });
     });
   },
+
+
   buy: function(req, res) {
 		var st = req.param('buys');
+    if (typeof(req.param('id')) != "undefined") {
+      var id = req.param('id');
+    }
 		if (typeof(st) == "string") {
 			var arr = [];
 			st = JSON.parse(st);
@@ -72,7 +77,12 @@ module.exports = {
 					});
 
 					async.parallel(tasks, function(err, result){
-						return res.send(result);
+            Orders.create({
+              buys: st,
+              paid: true
+             }).exec(function(err, item){
+                return res.send(result);
+            });
 					});
 				}
 			});

@@ -49,7 +49,7 @@
             .when('/itog',{
 
                 templateUrl: "view/itog.html",
-                controller: "itogController"
+                controller: "ItogController"
 
             })
             .when('/post',{
@@ -68,6 +68,12 @@
 
                 templateUrl: "view/dolg.html",
                 controller: "DolgController"
+
+            })
+            .when('/sklad_ras',{
+
+                templateUrl: "view/sklad_ras.html",
+                controller: "SkladRasController"
 
             })
             .otherwise({

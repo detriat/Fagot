@@ -1,12 +1,15 @@
-<!-- Начало шапки -->
-<div ng-include="'view/header.html'" ng-controller="MenuController" class="col-lg-2 header">
+<section layout="row" flex>
+  <md-sidenav ng-include="'view/header.html'" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" ng-controller="MenuController">
 
-</div>
+  </md-sidenav>
 
-<!-- Конец шапки -->
-<!-- Начало контента -->
-<div class="col-lg-10 col-lg-offset-2">
-  <div class="row">
-
-  </div>
-</div>
+  <!-- Конец шапки -->
+  <!-- Начало контента -->
+  <md-content layout-padding layout-fill layout-gt-sm="row" layout-align="start start" flex layout="row">
+    <md-card flex>
+      Каса за день: <br>
+      
+    </md-card>
+  </md-content>
+  <!-- Конец контента -->
+</section>

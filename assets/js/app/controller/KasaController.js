@@ -77,23 +77,11 @@
       var order = {
         buys: arr
       };
-      /*
-      var or = new Orders.in(order);
 
-      or.$save().then(function() {
-        getDesserts();
-        $scope.zakaz = {
-          id: "",
-          buys: []
-        };
-      }, function(err) {
-        console.log(err);
-      });
-      */
-      Orders.buy.get({buys:arr}, function(item){
+      Orders.buy.query({buys:arr}, function(item){
+        getDesserts();getDesserts1();
         console.log(item);
       });
-
     }
 
     $scope.new = function() {
