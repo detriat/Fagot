@@ -9,8 +9,8 @@ module.exports = {
 
   attributes: {
     paid: {
-      type: 'Boolean',
-      defaultsTo: true
+      type: 'string',
+      defaultsTo: 'true'
     }
   }
 };
